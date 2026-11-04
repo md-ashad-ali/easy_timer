@@ -2,6 +2,7 @@ name: easy_timer
 description: "A simple and easy to use timer package for Flutter with countdown and count up support."
 version: 1.0.0
 homepage: https://github.com/md-ashad-ali/easy_timer.git
+repository: https://github.com/md-ashad-ali/easy_timer.git
 
 environment:
   sdk: ^3.13.4
