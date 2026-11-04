@@ -1,8 +1,7 @@
 ## 1.0.0
 
 * Initial release.
-* Countdown timer support.
-* Count up timer support.
-* Start, pause, reset controls.
-* Time format utility (HH:MM:SS).
+* Countdown and count up timer.
+* Start, pause and reset controls.
+* HH:MM:SS time formatting.
 * EasyTimerBuilder for custom UI.

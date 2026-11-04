@@ -1,39 +1,102 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# easy_timer
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A simple and lightweight Flutter timer package with countdown and count up support.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Countdown timer (e.g. 60 to 0)
+- Count up timer / stopwatch (0 upward, with optional limit)
+- Start, pause and reset controls
+- HH:MM:SS time formatting
+- Custom UI support with `EasyTimerBuilder`
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add this to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  easy_timer: ^1.0.0
+```
+
+Then run:
+
+```
+flutter pub get
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+### 1. Create a controller
 
 ```dart
-const like = 'sample';
+import 'package:easy_timer/easy_timer.dart';
+
+final EasyTimeController controller = EasyTimeController();
 ```
+
+### 2. Set duration
+
+```dart
+// Countdown: 60 to 0
+controller.setDuration(second: 60, isCountDown: true);
+
+// Count up: 0 to 60, then stops
+controller.setDuration(second: 60, isCountDown: false);
+
+// Stopwatch: 0 upward, no limit
+controller.setDuration(second: 0, isCountDown: false);
+```
+
+### 3. Show the timer
+
+```dart
+CountDownTimer(easyTimeController: controller)
+```
+
+Or with your own text style:
+
+```dart
+EasyTimerBuilder(
+  controller: controller,
+  builder: (context, second) {
+    return Text(
+      TimeFormate.formateSecond(second),
+      style: const TextStyle(fontSize: 40, color: Colors.blue),
+    );
+  },
+)
+```
+
+### 4. Control the timer
+
+```dart
+controller.start();
+controller.pause();
+controller.reset();
+```
+
+### 5. Dispose
+
+```dart
+@override
+void dispose() {
+  controller.dispose();
+  super.dispose();
+}
+```
+
+## Timer states
+
+| State | Meaning |
+|---|---|
+| `TimerState.initial` | Not started |
+| `TimerState.running` | Running |
+| `TimerState.paused` | Paused |
+| `TimerState.completed` | Finished |
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Source code: https://github.com/md-ashad-ali/easy_timer
+
+Issues and contributions are welcome.
