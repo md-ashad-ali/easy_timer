@@ -75,8 +75,10 @@ controller.start();
 controller.pause();
 controller.reset();
 ```
+### 5. SaveTime
+String time = controller.saveTime();   // "02:05" ba "01:02:05"
 
-### 5. Dispose
+### 6. Dispose
 
 ```dart
 @override

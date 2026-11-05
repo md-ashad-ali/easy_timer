@@ -1,3 +1,11 @@
+## 1.1.0
+
+* Added `hours`, `minutes`, `seconds` getters.
+* Added `formateMinSec` and `formatedTime` getters.
+* Added `saveTime()` method.
+* Fixed count up limit bug.
+
+
 ## 1.0.0
 
 * Initial release.

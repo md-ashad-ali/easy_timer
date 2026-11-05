@@ -10,17 +10,32 @@ class EasyTimeContoler extends ChangeNotifier {
   int _targetSecond = 0;
   TimerState _state = TimerState.initial;
   bool _isCountDown = true;
-
   int get curentSecond => _curentSecond;
   TimerState get state => _state;
+  int get hours => _curentSecond ~/ 3600;
+  int get minutes => (_curentSecond % 3600) ~/ 60;
+  int get seconds => _curentSecond % 60;
+
+  String get formateMinSec {
+    final m = minutes.toString().padLeft(2, '0');
+    final s = seconds.toString().padLeft(2, '0');
+    return '$m:$s';
+  }
+
+  String get formatedTime => TimeFormate.formateSecond(_curentSecond);
 
   void setDuration({required int second, required bool isCountDown}) {
+    _timer?.cancel();
     _initialSecond = second;
+    _targetSecond = second;
     _curentSecond = isCountDown ? second : 0;
     _isCountDown = isCountDown;
-
     _state = TimerState.initial;
     notifyListeners();
+  }
+
+  String saveTime() {
+    return hours > 0 ? formatedTime : formateMinSec;
   }
 
   void start() {
@@ -41,7 +56,7 @@ class EasyTimeContoler extends ChangeNotifier {
       } else {
         // Count UP
         _curentSecond++;
-        if (_targetSecond > 0 && _curentSecond >= _curentSecond) {
+        if (_targetSecond > 0 && _curentSecond >= _targetSecond) {
           _curentSecond = _targetSecond;
           timer.cancel();
           _state = TimerState.completed;
