@@ -1,3 +1,11 @@
+## 2.0.0
+
+* Added EasyTimerBuilder widget.
+* Added optional builder to CountDownTimer and CountUpTimer.
+* Added hours, minutes, seconds getters and saveTime().
+* Fixed count up limit bug.
+
+
 ## 1.1.0
 
 * Added `hours`, `minutes`, `seconds` getters.

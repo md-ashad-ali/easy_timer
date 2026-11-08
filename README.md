@@ -34,18 +34,89 @@ import 'package:easy_timer/easy_timer.dart';
 
 final EasyTimeController controller = EasyTimeController();
 ```
+```Example
+import 'package:easy_timer/easy_timer.dart';
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final EasyTimeContoler controller = EasyTimeContoler();
+
+  // Controller method create kore initState e call
+  void setupTimer() {
+    controller.setDuration(second: 0, isCountDown: false);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setupTimer();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Easy Timer')),
+      body: Center(
+        child: EasyTimerBuilder(
+          controller: controller,
+          builder: (context, second) {
+            return Text(
+              TimeFormate.formateSecond(second),
+              style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+            );
+          },
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(onPressed: controller.pause, child: const Text('Pause')),
+            ElevatedButton(onPressed: controller.start, child: const Text('Start')),
+            ElevatedButton(onPressed: controller.reset, child: const Text('Reset')),
+            ElevatedButton(
+              onPressed: () => debugPrint(controller.saveTime()),
+              child: const Text('Save'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
 
 ### 2. Set duration
 
 ```dart
+@override
+void initState() {
+  super.initState();
 // Countdown: 60 to 0
-controller.setDuration(second: 60, isCountDown: true);
+  controller.setDuration(second: 60, isCountDown: true);
 
 // Count up: 0 to 60, then stops
-controller.setDuration(second: 60, isCountDown: false);
+  controller.setDuration(second: 60, isCountDown: false);
 
 // Stopwatch: 0 upward, no limit
-controller.setDuration(second: 0, isCountDown: false);
+  controller.setDuration(second: 0, isCountDown: false);
+  
+}
 ```
 
 ### 3. Show the timer
@@ -76,7 +147,11 @@ controller.pause();
 controller.reset();
 ```
 ### 5. SaveTime
+
+
+```dart
 String time = controller.saveTime();   // "02:05" ba "01:02:05"
+```
 
 ### 6. Dispose
 
