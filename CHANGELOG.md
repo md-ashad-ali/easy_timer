@@ -1,3 +1,7 @@
+## 2.1.0
+
+* Updated README documentation.
+
 ## 2.0.0
 
 * Added EasyTimerBuilder widget.

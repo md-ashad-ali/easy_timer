@@ -34,7 +34,29 @@ import 'package:easy_timer/easy_timer.dart';
 
 final EasyTimeController controller = EasyTimeController();
 ```
-```Example
+
+
+### 2. Set duration
+
+```dart
+@override
+void initState() {
+  super.initState();
+// Countdown: 60 to 0
+  controller.setDuration(second: 60, isCountDown: true);
+
+// Count up: 0 to 60, then stops
+  controller.setDuration(second: 60, isCountDown: false);
+
+// Stopwatch: 0 upward, no limit
+  controller.setDuration(second: 0, isCountDown: false);
+  
+}
+```
+
+### 3. Example
+
+```dart
 import 'package:easy_timer/easy_timer.dart';
 import 'package:flutter/material.dart';
 
@@ -98,31 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-```
-
-### 2. Set duration
-
-```dart
-@override
-void initState() {
-  super.initState();
-// Countdown: 60 to 0
-  controller.setDuration(second: 60, isCountDown: true);
-
-// Count up: 0 to 60, then stops
-  controller.setDuration(second: 60, isCountDown: false);
-
-// Stopwatch: 0 upward, no limit
-  controller.setDuration(second: 0, isCountDown: false);
-  
-}
-```
-
-### 3. Show the timer
-
-```dart
-CountDownTimer(easyTimeController: controller)
 ```
 
 Or with your own text style:
